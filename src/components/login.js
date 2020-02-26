@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {SignUp} from '../actions/user'
+import firebase from '../Firebase';
 
-export default class Login extends Component {
+ class Login extends Component {
     constructor(props) {
         super(props);
+        this.ref = firebase.firestore().collection('boards');
         this.state={
             email:"",
             fullName: "",
@@ -10,6 +15,33 @@ export default class Login extends Component {
             password: "",
         }
     }
+     onClick = ()=>{
+         const {email,
+             fullName,
+             userName,
+             password} = this.state;
+        let data = {
+            emailPhone:email,
+            fullName: fullName,
+            userName: userName,
+            password: password
+        }
+        debugger
+         this.ref.add(data).then((docRef) => {
+             debugger
+             // this.setState({
+             //     title: '',
+             //     description: '',
+             //     author: ''
+             // });
+             // this.props.history.push("/")
+         })
+             .catch((error) => {
+                 debugger
+                 console.error("Error adding document: ", error);
+             });
+        // this.props.SignUp(data);
+     }
     render() {
         const {email,
             fullName,
@@ -79,7 +111,7 @@ export default class Login extends Component {
                            <div style={{alignContent:"center",display:'flex',
                                justifyContent:"center",marginBottom:8,marginLeft:40,marginRight:40,marginTop:8}}>
                                <button type="button" style={{backgroundColor:"#3897F0", fontWeight:500,padding:"5px 9px",textAlign:"center",
-                                   borderRadius:4   ,color:"#fff"}}>
+                                   borderRadius:4   ,color:"#fff"}} onClick={this.onClick}>
                         <span style={{height:"16%",width:'16%',fontWeight:600}}>
                             Sign Up
                         </span>
@@ -93,3 +125,9 @@ export default class Login extends Component {
         )
     }
 }
+const mapState = (state) => ({auth: state.auth});
+
+const mapDispatch = (dispatch) => ({
+    SignUp
+});
+export default connect(mapState, mapDispatch)(Login);
