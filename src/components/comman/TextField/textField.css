@@ -1,0 +1,13 @@
+mainContainer{
+    align-items: center;
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+}
+textInput{
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    height: 20px;
+    padding: 5px;
+}
