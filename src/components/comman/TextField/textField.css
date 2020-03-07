@@ -1,13 +1,14 @@
-mainContainer{
+.textContainer{
     align-items: center;
     display: flex;
     width: 100%;
-    margin-top: 5px;
+    margin-top: 5%;
+    background-color: #61dafb;
 }
-textInput{
+.textInput{
     flex: 1;
     overflow: hidden;
     display: flex;
-    height: 20px;
-    padding: 5px;
+    height: 20%;
+    padding: 4% ;
 }
